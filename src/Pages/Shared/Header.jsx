@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
 import LeftSideNav from './LeftSideNav';
 import { FaUserAlt } from 'react-icons/fa';
+import Image from 'react-bootstrap/Image';
+import { Button } from 'react-bootstrap';
 
 const Header = () => {
     const { user } = useAuth();
@@ -21,18 +23,32 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#features">Features</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
+                        {/*  */}
                     </Nav>
-                    <Nav>
-                        <Nav.Link href="#deets">
+                    <Nav className="d-flex align-items-center text-muted">
+                        <Nav.Link>
                             {user?.displayName}
                         </Nav.Link>
-                        <Nav.Link eventKey={2} href="#memes">
-                            <FaUserAlt />
-                        </Nav.Link>
+                        <div>
+                            {
+                                user && user.uid ?
+                                    user.photoURL ?
+                                        <Image src={user.photoURL} style={{ height: '33px' }} roundedCircle></Image>
+                                        :
+                                        <FaUserAlt />
+                                    :
+                                    <>
+                                        <Link to="/login">
+                                            <Button className="me-2" variant="outline-primary">Login</Button>
+                                        </Link>
+                                        <Link to="/signup">
+                                            <Button variant="outline-dark">Sign Up</Button>
+                                        </Link>
+                                    </>
+                            }
+                        </div>
                     </Nav>
-                    <div className='d-lg-none'>
+                    <div className='d-lg-none text-center text-md-start mt-3 lg-mt-0'>
                         <LeftSideNav />
                     </div>
                 </Navbar.Collapse>
