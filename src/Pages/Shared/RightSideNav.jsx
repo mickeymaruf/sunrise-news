@@ -1,14 +1,28 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import { FaGoogle, FaGithub, FaFacebook, FaTwitter,FaWhatsapp } from 'react-icons/fa';
+import { FaGoogle, FaGithub, FaFacebook, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 import ListGroup from 'react-bootstrap/ListGroup';
 import BrandCarousel from './BrandCarousel';
+import { useAuth } from '../../contexts/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
+
+const googleProvider = new GoogleAuthProvider();
 
 const RightSideNav = () => {
+    const { providerLogin } = useAuth();
+    const handleGoogleSignin = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                console.log(result);
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }
     return (
         <div>
             <div className="d-grid gap-2">
-                <Button className="d-flex justify-content-center align-items-center gap-2" variant="outline-primary">
+                <Button onClick={handleGoogleSignin} className="d-flex justify-content-center align-items-center gap-2" variant="outline-primary">
                     <FaGoogle style={{ fontSize: '20px' }} /> Login via Google
                 </Button>
                 <Button className="d-flex justify-content-center align-items-center gap-2" variant="outline-dark">

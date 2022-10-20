@@ -3,9 +3,12 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthProvider';
 import LeftSideNav from './LeftSideNav';
+import { FaUserAlt } from 'react-icons/fa';
 
 const Header = () => {
+    const { user } = useAuth();
     return (
         <Navbar collapseOnSelect expand="lg" bg="white" variant="white">
             <Container>
@@ -22,9 +25,11 @@ const Header = () => {
                         <Nav.Link href="#pricing">Pricing</Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="#deets">More deets</Nav.Link>
+                        <Nav.Link href="#deets">
+                            {user?.displayName}
+                        </Nav.Link>
                         <Nav.Link eventKey={2} href="#memes">
-                            Dank memes
+                            <FaUserAlt />
                         </Nav.Link>
                     </Nav>
                     <div className='d-lg-none'>
