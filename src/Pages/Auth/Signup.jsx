@@ -9,6 +9,7 @@ const Signup = () => {
     const navigate = useNavigate();
     const { createUser } = useAuth();
     const [error, setError] = useState(null);
+    const [accepted, setAccepted] = useState(false);
     const handleSignUp = (e) => {
         setError(null);
         e.preventDefault();
@@ -17,7 +18,7 @@ const Signup = () => {
         const email = form.email.value;
         const picture = form.picture.value;
         const password = form.password.value;
-        if(!name || !email ||password){
+        if (!name || !email || !password) {
             setError("Field can't be empty!");
             return;
         }
@@ -50,7 +51,10 @@ const Signup = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" name="password" placeholder="********" />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Check onChange={(e) => setAccepted(e.target.checked)} type="checkbox" label="Accept Terms and Conditions" />
+                </Form.Group>
+                <Button variant="primary" type="submit" disabled={!accepted}>
                     Sign Up
                 </Button>
                 {

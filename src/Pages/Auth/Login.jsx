@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const navigate = useNavigate();
     const { loginUser } = useAuth();
     const [error, setError] = useState(null);
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
     const handleSignIn = (e) => {
         setError(null);
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
+        if (!email || !password) {
+            setError("Field can't be empty!");
+            return;
+        }
         loginUser(email, password)
             .then(result => {
                 form.reset();
-                navigate("/");
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 setError(error.message);

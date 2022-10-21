@@ -5,6 +5,7 @@ import Category from '../Pages/Category/Category';
 import News from '../Pages/News/News';
 import Login from '../Pages/Auth/Login';
 import Signup from '../Pages/Auth/Signup';
+import RequireAuth from './RequireAuth';
 
 export const router = createBrowserRouter([
     {
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
             {
                 path: '/news/:id',
                 loader: ({ params }) => fetch(`http://localhost:5500/news/${params.id}`),
-                element: <News />
+                element: <RequireAuth><News /></RequireAuth>
             },
             {
                 path: '/login',
