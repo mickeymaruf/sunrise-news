@@ -33,9 +33,9 @@ const Header = () => {
                             {
                                 user && user.uid ?
                                     user.photoURL ?
-                                        <Image src={user.photoURL} style={{ height: '33px' }} roundedCircle></Image>
+                                        <Link to="/profile"><Image src={user.photoURL} style={{ height: '33px', width: '33px', objectFit: 'cover' }} roundedCircle></Image></Link>
                                         :
-                                        <FaUserAlt />
+                                        <Link to="/profile"><FaUserAlt /></Link>
                                     :
                                     <>
                                         <Link to="/login">

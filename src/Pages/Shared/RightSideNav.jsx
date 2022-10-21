@@ -15,7 +15,6 @@ const RightSideNav = () => {
     const handleGoogleSignin = () => {
         providerLogin(googleProvider)
             .then(result => {
-                console.log(result);
                 navigate("/");
             })
             .catch(error => {

@@ -6,6 +6,8 @@ import News from '../Pages/News/News';
 import Login from '../Pages/Auth/Login';
 import Signup from '../Pages/Auth/Signup';
 import RequireAuth from './RequireAuth';
+import Terms from '../Pages/Others/Terms';
+import Profile from '../Pages/Others/Profile';
 
 export const router = createBrowserRouter([
     {
@@ -32,6 +34,14 @@ export const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <Signup />
+            },
+            {
+                path: '/terms',
+                element: <Terms />
+            },
+            {
+                path: '/profile',
+                element: <RequireAuth><Profile /></RequireAuth>
             },
         ]
     }

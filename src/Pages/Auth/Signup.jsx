@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useAuth } from '../../contexts/AuthProvider';
-import { updateProfile } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Signup = () => {
     const navigate = useNavigate();
-    const { createUser } = useAuth();
+    const { createUser, updateUserProfile, verifyEmail } = useAuth();
     const [error, setError] = useState(null);
     const [accepted, setAccepted] = useState(false);
     const handleSignUp = (e) => {
@@ -24,9 +24,16 @@ const Signup = () => {
         }
         createUser(email, password)
             .then(result => {
-                updateProfile(result.user, { displayName: name, photoURL: picture })
                 form.reset();
                 navigate("/");
+                updateUserProfile(name, picture)
+                    .then(() => { })
+                    .catch(error => console.log(error));
+                verifyEmail()
+                    .then(() => {
+                        toast.success("Successful! Please verify your email.");
+                    })
+                    .catch(error => console.log(error));
             })
             .catch(error => {
                 setError(error.message);
@@ -52,7 +59,7 @@ const Signup = () => {
                     <Form.Control type="password" name="password" placeholder="********" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check onChange={(e) => setAccepted(e.target.checked)} type="checkbox" label="Accept Terms and Conditions" />
+                    <Form.Check onChange={(e) => setAccepted(e.target.checked)} type="checkbox" label={<>Accept <Link to="/terms">Terms and Conditions</Link></>} />
                 </Form.Group>
                 <Button variant="primary" type="submit" disabled={!accepted}>
                     Sign Up
