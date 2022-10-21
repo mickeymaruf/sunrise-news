@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useAuth } from '../../contexts/AuthProvider';
@@ -8,13 +8,19 @@ import { useNavigate } from 'react-router-dom';
 const Signup = () => {
     const navigate = useNavigate();
     const { createUser } = useAuth();
+    const [error, setError] = useState(null);
     const handleSignUp = (e) => {
+        setError(null);
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
         const email = form.email.value;
         const picture = form.picture.value;
         const password = form.password.value;
+        if(!name || !email ||password){
+            setError("Field can't be empty!");
+            return;
+        }
         createUser(email, password)
             .then(result => {
                 updateProfile(result.user, { displayName: name, photoURL: picture })
@@ -22,7 +28,7 @@ const Signup = () => {
                 navigate("/");
             })
             .catch(error => {
-                console.log(error);
+                setError(error.message);
             })
     }
     return (
@@ -47,9 +53,11 @@ const Signup = () => {
                 <Button variant="primary" type="submit">
                     Sign Up
                 </Button>
-                <Form.Text className="text-danger d-block mt-3">
-                    We'll never share your email with anyone else.
-                </Form.Text>
+                {
+                    error && <Form.Text className="text-danger d-block mt-3">
+                        {error}
+                    </Form.Text>
+                }
             </Form>
         </div>
     );

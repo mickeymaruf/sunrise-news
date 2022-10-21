@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,9 @@ import { useAuth } from '../../contexts/AuthProvider';
 const Login = () => {
     const navigate = useNavigate();
     const { loginUser } = useAuth();
+    const [error, setError] = useState(null);
     const handleSignIn = (e) => {
+        setError(null);
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
@@ -18,7 +20,7 @@ const Login = () => {
                 navigate("/");
             })
             .catch(error => {
-                console.log(error);
+                setError(error.message);
             })
     }
     return (
@@ -35,9 +37,11 @@ const Login = () => {
                 <Button variant="primary" type="submit">
                     Login
                 </Button>
-                <Form.Text className="text-danger d-block mt-3">
-                    We'll never share your email with anyone else.
-                </Form.Text>
+                {
+                    error && <Form.Text className="text-danger d-block mt-3">
+                        {error}
+                    </Form.Text>
+                }
             </Form>
         </div>
     );
