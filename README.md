@@ -1,8 +1,25 @@
 # Sunrise News
+News publishing website
 
-There are two branches, the default one (this one) is for the client site(frontend -> react, firebase)
-Another one is server site(backend -> node, express).
+**Technology:**
+- React, React Router, Firebase
+- React-bootstrap
 
-markup using -> react-bootstrap components;
+## Installation Guide (Client)
+ 1. Clone the repository & install dependencies using:
+```shell
+npm install
+```
 
-to use this app you need to run both server and client project at the same time.
+ 2. Create a `.env.local` file in main directory
+
+This file holds sensitive settings, which should not be pushed to git. Example content suitable for development/testing could be:
+```shell
+REACT_APP_apiKey=
+REACT_APP_authDomain=
+REACT_APP_projectId=
+REACT_APP_storageBucket=
+REACT_APP_messagingSenderId=
+REACT_APP_appId=
+```
+Go to https://console.firebase.google.com to create new firebase project and put the credentials it in the SECRET_KEY value.
