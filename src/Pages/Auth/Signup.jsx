@@ -52,7 +52,7 @@ const Signup = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPicture">
                     <Form.Label>Picture URL</Form.Label>
-                    <Form.Control type="url" name="picture" placeholder="Enter picture url" />
+                    <Form.Control type="text" name="picture" placeholder="Enter picture url" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>

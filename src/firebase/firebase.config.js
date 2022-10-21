@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAWeHZtEnfclN1LJky2jdi7-8iSwMky7HQ",
-  authDomain: "sunrise-news-client.firebaseapp.com",
-  projectId: "sunrise-news-client",
-  storageBucket: "sunrise-news-client.appspot.com",
-  messagingSenderId: "364911812108",
-  appId: "1:364911812108:web:307b983de1cfcd7f271829"
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId,
 };
 
 // Initialize Firebase
