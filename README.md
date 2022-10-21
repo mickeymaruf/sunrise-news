@@ -2,7 +2,7 @@
 News publishing website
 
 **Technology:**
-- React, React Router, Firebase
+- React, React Router, Firebase, Node js, Express
 - React-bootstrap
 
 ## Installation Guide (Client)
