@@ -25,7 +25,21 @@ const Login = () => {
             .then(result => {
                 if (result.user.emailVerified) {
                     form.reset();
-                    navigate(from, { replace: true });
+                    // requesting for jwt web token
+                    fetch('http://localhost:5000/jwt', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: result.user.email
+                        })
+                    }).then(res => res.json())
+                        .then(data => {
+                            localStorage.setItem("sunrise-news-token", data.token);
+                            navigate(from, { replace: true });
+                        })
+                    //
                 } else {
                     toast.error("Your email is not verified!")
                 }

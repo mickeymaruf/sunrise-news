@@ -25,6 +25,7 @@ const CreateNewsBtn = ({ setLatestNews }) => {
         setRequiredCategory(false);
 
         const author = {
+            email: user.email,
             name: user.displayName,
             img: user.photoURL
         }
@@ -32,7 +33,8 @@ const CreateNewsBtn = ({ setLatestNews }) => {
         fetch('http://localhost:5000/news', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('sunrise-news-token')}`
             },
             body: JSON.stringify(newsObj)
         })
