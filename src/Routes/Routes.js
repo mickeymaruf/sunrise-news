@@ -15,17 +15,17 @@ export const router = createBrowserRouter([
         path: '/', element: <Root />, children: [
             {
                 path: '/',
-                loader: () => fetch('https://sunrise-news-server.vercel.app/news'),
+                loader: () => fetch('http://localhost:5000/news'),
                 element: <Home />
             },
             {
                 path: '/category/:id',
-                loader: ({ params }) => fetch(`https://sunrise-news-server.vercel.app/category/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`),
                 element: <Category />
             },
             {
                 path: '/news/:id',
-                loader: ({ params }) => fetch(`https://sunrise-news-server.vercel.app/news/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/news/${params.id}`),
                 element: <RequireAuth><News /></RequireAuth>
             },
             {

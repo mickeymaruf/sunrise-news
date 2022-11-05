@@ -13,7 +13,7 @@ const Root = () => {
             <Container className='pt-3'>
                 <Row>
                     <Col lg="2" className='d-none d-lg-block'>
-                       <LeftSideNav />
+                        <LeftSideNav />
                     </Col>
                     <Col lg="7">
                         <Outlet />

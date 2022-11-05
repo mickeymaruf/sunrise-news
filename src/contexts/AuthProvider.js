@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
     }
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            if(currentUser === null || currentUser.emailVerified){
+            if (currentUser === null || currentUser.emailVerified) {
                 setUser(currentUser);
             }
             setLoading(false);
@@ -40,6 +40,14 @@ const AuthProvider = ({ children }) => {
         return () => {
             unsubscribe();
         }
+    }, [])
+
+    // loading categories
+    const [categories, setCategories] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/categories')
+            .then(res => res.json())
+            .then(data => setCategories(data));
     }, [])
     const value = {
         user,
@@ -50,7 +58,8 @@ const AuthProvider = ({ children }) => {
         loading,
         updateUserProfile,
         verifyEmail,
-        setLoading
+        setLoading,
+        categories
     };
     return (
         <AuthContext.Provider value={value}>
