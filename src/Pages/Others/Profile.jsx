@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useAuth } from '../../contexts/AuthProvider';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const Profile = () => {
     const { user, updateUserProfile } = useAuth();
@@ -15,12 +16,15 @@ const Profile = () => {
             .then(() => {
                 toast.success("Profile Updated!");
             })
-            .catch(error=>{
+            .catch(error => {
                 toast.error(error.message);
             })
     }
     return (
         <Form onSubmit={handleUpdateProfile} className="bg-white p-5 px- mt-3 rounded-3">
+            {/* <Helmet>
+                <title>Profile</title>
+            </Helmet> */}
             <Form.Group className="mb-3">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" defaultValue={user?.email} disabled />
@@ -33,7 +37,7 @@ const Profile = () => {
                 <Form.Label>Your Photo URL</Form.Label>
                 <Form.Control type="text" name="photo" defaultValue={user.photoURL} />
             </Form.Group>
-            
+
             <Button variant="primary" type="submit">
                 Save Changes
             </Button>

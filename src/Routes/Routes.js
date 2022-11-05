@@ -8,6 +8,7 @@ import Signup from '../Pages/Auth/Signup';
 import RequireAuth from './RequireAuth';
 import Terms from '../Pages/Others/Terms';
 import Profile from '../Pages/Others/Profile';
+import Location from '../Pages/Others/Location';
 
 export const router = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
             {
                 path: '/profile',
                 element: <RequireAuth><Profile /></RequireAuth>
+            },
+            {
+                path: '/location',
+                element: <Location />
             },
         ]
     }
