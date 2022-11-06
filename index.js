@@ -42,12 +42,16 @@ const run = async () => {
 
         // news
         app.get('/news', async (req, res) => {
+            const page = +req.query.page;
+            const size = +req.query.size;
+            console.log(size, page);
             const options = {
                 sort: { 'author.published_date': -1 }
             }
-            const cursor = newsCollection.find({}, options);
+            const cursor = newsCollection.find({}, options).skip(size * page).limit(size);
             const news = await cursor.toArray();
-            res.send(news);
+            const newsCount = await newsCollection.estimatedDocumentCount();
+            res.send({ newsCount, news });
         })
         // single news by id
         app.get('/news/:_id', async (req, res) => {
