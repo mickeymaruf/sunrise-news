@@ -44,8 +44,15 @@ const Profile = () => {
     }, [user?.email, logOut])
     // delete news
     const handleDeleteNews = (_id) => {
+        const confirmDelete = window.confirm('Are you sure want to delete this?');
+        if(!confirmDelete){
+            return;
+        }
         fetch(`http://localhost:5000/news/${_id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('sunrise-news-token')}`
+            }
         }).then(res => res.json())
             .then(data => {
                 if (data.deletedCount > 0) {
