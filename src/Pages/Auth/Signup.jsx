@@ -40,7 +40,7 @@ const Signup = () => {
             })
     }
     return (
-        <div className="p-5 pt-0">
+        <div className="pb-5 px-md-5 p-lg-0 px-xl-5">
             <Form onSubmit={handleSignUp} className="bg-white p-5 px- mt-3 rounded-3">
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Name</Form.Label>

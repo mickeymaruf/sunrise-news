@@ -26,7 +26,7 @@ const Profile = () => {
             })
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/newsByEmail?email=${user.email}`, {
+        fetch(`https://sunrise-news-server.vercel.app/newsByEmail?email=${user.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('sunrise-news-token')}`
             }
@@ -45,10 +45,10 @@ const Profile = () => {
     // delete news
     const handleDeleteNews = (_id) => {
         const confirmDelete = window.confirm('Are you sure want to delete this?');
-        if(!confirmDelete){
+        if (!confirmDelete) {
             return;
         }
-        fetch(`http://localhost:5000/news/${_id}`, {
+        fetch(`https://sunrise-news-server.vercel.app/news/${_id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('sunrise-news-token')}`

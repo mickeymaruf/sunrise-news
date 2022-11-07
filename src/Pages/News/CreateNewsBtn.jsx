@@ -30,7 +30,7 @@ const CreateNewsBtn = ({ setLatestNews }) => {
             img: user.photoURL
         }
         const newsObj = { category_id, title, image_url, details, author }
-        fetch('http://localhost:5000/news', {
+        fetch('https://sunrise-news-server.vercel.app/news', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -43,7 +43,7 @@ const CreateNewsBtn = ({ setLatestNews }) => {
                 if (data.acknowledged === true) {
                     toast.success('News posted!');
                     form.reset();
-                    fetch(`http://localhost:5000/news/${data.insertedId}`)
+                    fetch(`https://sunrise-news-server.vercel.app/news/${data.insertedId}`)
                         .then(res => res.json())
                         .then(currentNews => {
                             setLatestNews(prevState => [currentNews, ...prevState]);

@@ -5,6 +5,7 @@ import CreateNewsBtn from '../News/CreateNewsBtn';
 import { Pagination } from 'react-bootstrap';
 import { useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
+import SearchNews from '../News/SearchNews';
 
 const Home = () => {
     const { newsCount } = useLoaderData();
@@ -14,13 +15,16 @@ const Home = () => {
     const pages = Math.ceil(newsCount / size);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/news?page=${page}&size=${size}`)
+        fetch(`https://sunrise-news-server.vercel.app/news?page=${page}&size=${size}`)
             .then(res => res.json())
             .then(data => setLatestNews(data.news))
     }, [page, size])
     return (
         <div>
-            <CreateNewsBtn setLatestNews={setLatestNews} />
+            <div className='d-flex justify-content-between'>
+                <CreateNewsBtn setLatestNews={setLatestNews} />
+                <SearchNews setLatestNews={setLatestNews} />
+            </div>
             {
                 latestNews.map(singleNews => <NewsCard key={singleNews._id} news={singleNews}>
                     {
@@ -37,6 +41,7 @@ const Home = () => {
                             [...Array(pages).keys()].map(i => <Pagination.Item
                                 key={i}
                                 onClick={() => setPage(i)}
+                                active={i === page}
                             >
                                 {i + 1}
                             </Pagination.Item>)

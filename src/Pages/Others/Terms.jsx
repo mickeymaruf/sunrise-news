@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 const Terms = () => {
     return (
-        <div>
+        <div className='pb-5 p-3 ps-lg-0'>
             <Link to="/signup"><FaArrowLeft /> Back to Signup Page</Link>
             <h2 className='mt-2'>Terms and Conditions.</h2>
-            <code>
+            <small>
                 Welcome to Sunrise News <br />
 
                 These terms and conditions outline the rules and regulations for the use of Sunrise News's Website, located at Website.com.<br />
@@ -23,7 +23,7 @@ const Terms = () => {
                 <br /><br />
                 License
                 Unless otherwise stated, Sunrise News and/or its licensors own the intellectual property rights for all material on Sunrise News. All intellectual property rights are reserved. You may access this from Sunrise News for your own personal use subjected to restrictions set in these terms and conditions.
-            </code>
+            </small>
         </div>
     );
 };

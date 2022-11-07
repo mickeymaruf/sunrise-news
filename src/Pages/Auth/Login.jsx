@@ -26,7 +26,7 @@ const Login = () => {
                 if (result.user.emailVerified) {
                     form.reset();
                     // requesting for jwt web token
-                    fetch('http://localhost:5000/jwt', {
+                    fetch('https://sunrise-news-server.vercel.app/jwt', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
@@ -52,7 +52,7 @@ const Login = () => {
             })
     }
     return (
-        <div className="p-5 pt-0">
+        <div className="pb-5 px-md-5 p-lg-0 px-xl-5">
             <Form onSubmit={handleSignIn} className="bg-white p-5 px- mt-3 rounded-3">
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
