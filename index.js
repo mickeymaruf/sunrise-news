@@ -42,13 +42,17 @@ const run = async () => {
 
         // news
         app.get('/news', async (req, res) => {
+            let filter = {};
+            // search
+            if (req.query.search) {
+                filter = { title: { $regex: req.query.search, $options: 'i' } }
+            }
             const page = +req.query.page;
             const size = +req.query.size;
-            console.log(size, page);
             const options = {
                 sort: { 'author.published_date': -1 }
             }
-            const cursor = newsCollection.find({}, options).skip(size * page).limit(size);
+            const cursor = newsCollection.find(filter, options).skip(size * page).limit(size);
             const news = await cursor.toArray();
             const newsCount = await newsCollection.estimatedDocumentCount();
             res.send({ newsCount, news });
